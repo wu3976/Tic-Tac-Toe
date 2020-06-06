@@ -22,6 +22,7 @@ const judgeWin = () => {
     if (status_arr.indexOf(0) < 0){ return 3; }
     return 0;
 }
+
 /**
  * step 2: check if opponent is going to win.
  * @return {[]} the array of positions which is judged or operated.
@@ -60,8 +61,54 @@ const checkLackPosAndInsert = (result_arr, start, til, step) => {
         }
     }
 }
+
 /**
- * Step 4: See if can place to any diagonal.
+ * Step 3: judge if opponent firstly occupy a corner.
+ * @return {boolean} whether processed action or not.
+ */
+const judgeOppositeCase = () => {
+    let temp_count = 0;
+    let pos = 0;
+    for (let i = 0; i < status_arr.length; i++){
+        if (i % 2 === 0 && i !== 4){
+            if (status_arr[i] === 1){
+                temp_count++;
+                pos = i;
+            }
+        }
+    }
+    if (temp_count === 1 && status_arr.reduce((a, b) => {
+        return a + b;
+    }) === 1){
+        switch (pos) {
+            case 0 : {
+                processAction(2, 8);
+                return true;
+            }
+            case 8 : {
+                processAction(2, 2);
+                return true;
+            }
+            case 2 : {
+                processAction(2, 6);
+                return true;
+            }
+            case 6 : {
+                processAction(2, 2);
+                return true;
+            }
+            default: return false;
+        }
+    } else if (status_arr[4] === 0){ // step 4
+        processAction(2, 4);
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/**
+ * Step 5: See if can place to any diagonal.
  */
 const judgeDiag = () => {
     for (let i = 0; i < status_arr.length && i !== 4; i += 2){
@@ -186,11 +233,12 @@ const next = () => { // check if there is any win at both start and end.
         return winningResult;
     } else {
         let arr = judgeWouldWinAndSave();
-        if (arr.length !== 2){ // this means opponent is not going to win
-            if (status_arr[4] === 0){
-                processAction(2, 4);
-            } else if (!judgeDiag()){
-                processAction(2, status_arr.indexOf(0));
+        if (arr.length !== 2) { // this means opponent is not going to win
+            let temp_res = judgeOppositeCase();
+            if (!temp_res) {
+                if (!judgeDiag()) {
+                    processAction(2, status_arr.indexOf(0));// step 6
+                }
             }
         }
     }
@@ -203,9 +251,6 @@ const next = () => { // check if there is any win at both start and end.
 for (let i = 0; i < status_arr.length; i++){
     document.getElementById("" + i).addEventListener('click', (event) => {
         if (result === 0 && status_arr[i] === 0){
-            /*status_arr[i] = 1;
-            document.getElementById("" + i).innerHTML =
-                "<img class='grid-image' src='circle.jpg' alt='circle'>";*/
             processAction(1, i);
             result = next();
             if (result !== 0){
@@ -226,10 +271,20 @@ for (let i = 0; i < status_arr.length; i++){
 }
 
 const syncCount = () => {
-    document.getElementById("count").innerText =
-        "You win: " + result_count[0]
-        + ", I win: " + result_count[1]
-        + ", fair: " + result_count[2];
+
+    let yw = document.getElementById("yw");
+    let iw = document.getElementById("iw");
+    yw.innerText = result_count[0];
+    iw.innerText = result_count[1];
+    document.getElementById("f").innerText = result_count[2];
+
+    yw.style.backgroundColor = "white";
+    iw.style.backgroundColor = "white";
+    if (result_count[0] > result_count[1]){
+        yw.style.backgroundColor = "yellow";
+    } else if (result_count[0] < result_count[1]){
+        iw.style.backgroundColor = "yellow";
+    }
 }
 
 const reset = () => {

@@ -27,6 +27,10 @@
     font-size: 16px;
 }
 
+.num-container{
+    font-family: "Bodoni MT Black";
+}
+
 #header {
     font-family: Arial;
     font-size: 30px;
@@ -38,3 +42,4 @@
     font-size: 15px;
     color: #a84dc1;
 }
+
