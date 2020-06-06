@@ -2,7 +2,8 @@
     display: grid;
     grid-template-columns: auto auto auto;
     background-color: #2196F3;
-    padding: 10px;
+    /*padding: 10px;*/
+    border: solid 5px black;
     width: 310px;
 }
 .grid-item {
@@ -17,14 +18,27 @@
 }
 
 .button {
-    background-color: #4CAF50; /* Green */
     border: none;
-    color: white;
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+}
+
+#new_game {
+    background-color: #4CAF50;
+    color: white;
+}
+
+#submit_result{
+    background-color: #d9e9f8;
+    color: black;
+}
+
+#login{
+    background-color: blanchedalmond;
+    color: #822c2c;
 }
 
 .num-container{
@@ -41,5 +55,9 @@
     font-family: "Times New Roman";
     font-size: 15px;
     color: #a84dc1;
+}
+
+#login_status{
+    color: red;
 }
 

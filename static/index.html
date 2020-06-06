@@ -24,8 +24,19 @@
     <div class = "grid-item" id = "8"></div>
 </div>
 <p id = "status"></p>
-<p id = "count">You win: <span class="num-container" id="yw">0</span>, I win: <span class="num-container" id="iw">0</span>, fair: <span class="num-container" id="f">0</span></p>
-<button class="button" id="new_game">New Game</button>
+<p id = "count">You win: <span class="num-container" id="yw">0</span>, I win: <span class="num-container" id="iw">0</span>, tie: <span class="num-container" id="f">0</span></p>
+<p><button class="button" id="new_game">New Game</button></p>
+<p>
+<form action="/submit" method="get">
+    <input type="submit" class="button" id="submit_result" value="Submit score">
+</form>
+<span id = "login_status"></span>
+</p>
+<p>
+<form action="/login" method="get">
+    <input type="submit" class="button" id="login" value="Login">
+</form>
+</p>
 <script src="tttScript.js"></script>
 </body>
 </html>

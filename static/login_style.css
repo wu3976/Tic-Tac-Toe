@@ -1,0 +1,28 @@
+.header{
+    font-size: 40px;
+    font-weight: bold;
+}
+
+.label{
+    font-family: "Calibri";
+    font-weight: lighter;
+}
+
+.button{
+    font-family: Calibri;
+    border: solid 2px #576c32;
+    background: blanchedalmond;
+    color: #822c2c;
+}
+
+#login{
+    font-family: "Arial";
+    color: #822c2c;
+}
+
+#login_button{
+    width: 50px;
+    height: 30px;
+    font-weight: bold;
+    font-size: 15px;
+}

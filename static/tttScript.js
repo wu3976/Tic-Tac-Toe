@@ -313,4 +313,4 @@ const processAction = (player, pos) => {
 }
 document.getElementById("new_game").addEventListener('click', (event) => {
     reset();
-})
+});
