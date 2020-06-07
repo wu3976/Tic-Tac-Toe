@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fail</title>
+</head>
+<body>
+<p class="text" id = "control"></p>
+<script>
+    let urlParams = new URLSearchParams(window.location.search);
+    let value = urlParams.get("message");
+    console.log(value);
+
+    let output = document.getElementById("control");
+    if (value === "username_error"){
+        output.innerHTML = "Username not found! "
+                + "<form action='/signup' method='get'><input type='submit' value='Sign up an account'></form>";
+    } else if (value === "password_error"){
+        output.innerHTML = "Password error. "
+                + "<form action='/reset_pwd' method='get'><input type='submit' value='Reset password'></form>";
+    } else if (value === "unexpected_error"){
+        output.innerText = "Unexpected error. ";
+    }
+</script>
+</body>
+</html>

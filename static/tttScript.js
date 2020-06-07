@@ -311,6 +311,15 @@ const processAction = (player, pos) => {
             "<img class='grid-image' src='cross.jpg' alt='cross'>";
     }
 }
+
 document.getElementById("new_game").addEventListener('click', (event) => {
     reset();
 });
+
+let logoutButton = document.getElementById("logout");
+
+if (document.cookie.indexOf('id') < 0){
+    logoutButton.disabled = true;
+    logoutButton.style.backgroundColor = "#D3D3D3";
+    logoutButton.style.color = "black";
+}

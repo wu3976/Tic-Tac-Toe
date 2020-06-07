@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>You have already logged in</title>
+</head>
+<body>
+<p class="text" style="font-family: 'Calibri Light'; font-size: 20px;">
+    You have already logged in as: <span id="1" style="color: #8fa863;"></span>
+</p>
+<form method="get" action="/logout">
+    <input type="submit" value="Logout" style="font-family: 'Calibri Light'; border: solid 2px darkgreen; background: antiquewhite">
+</form>
+<script>
+    /**
+     * Find the value of cookie behind the '=' sign
+     * @param cookieStr The cookie
+     * @return {string} The value of cookie.
+     * @requires This method is designed for cookie that contains 1 key.
+     */
+    function getCookieValue(cookieStr){
+        let found = false;
+        for (var i = 0; !found; i++){
+            if (cookieStr[i] === '='){
+                found = true;
+            }
+        }
+        return cookieStr.substring(i, cookieStr.length);
+    }
+    console.log(document.cookie);
+    document.getElementById("1").innerText = getCookieValue(document.cookie);
+
+</script>
+</body>
+</html>
