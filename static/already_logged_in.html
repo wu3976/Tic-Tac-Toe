@@ -15,21 +15,22 @@
     /**
      * Find the value of cookie behind the '=' sign
      * @param cookieStr The cookie
+     * @param key The key of which value want to obtain.
      * @return {string} The value of cookie.
      * @requires This method is designed for cookie that contains 1 key.
      */
-    function getCookieValue(cookieStr){
-        let found = false;
-        for (var i = 0; !found; i++){
-            if (cookieStr[i] === '='){
-                found = true;
-            }
-        }
-        return cookieStr.substring(i, cookieStr.length);
-    }
-    console.log(document.cookie);
-    document.getElementById("1").innerText = getCookieValue(document.cookie);
+    function getCookieValue(cookieStr, key){
+        /*cookieStr = ....&key=xxx&*/
+        let str = cookieStr.substring(cookieStr.indexOf(key) + key.length + 1, cookieStr.length);
+        /*str = key=xxx&*/
+        let indexOfSeperation = str.indexOf('; ') < 0 ? str.length : str.indexOf('; ');
+        str = str.substring(0, indexOfSeperation);
 
+        return str;
+    }
+
+    console.log(document.cookie);
+    document.getElementById("1").innerText = getCookieValue(document.cookie, 'id');
 </script>
 </body>
 </html>

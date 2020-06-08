@@ -19,7 +19,8 @@
         output.innerHTML = "Password error. "
                 + "<form action='/reset_pwd' method='get'><input type='submit' value='Reset password'></form>";
     } else if (value === "unexpected_error"){
-        output.innerText = "Unexpected error. ";
+        output.innerHTML = "Unexpected error. <form method='get' action='/login'>"
+            + "<input type='submit' value='Return to login'></form>";
     }
 </script>
 </body>
