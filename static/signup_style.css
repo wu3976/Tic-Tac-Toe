@@ -1,0 +1,40 @@
+.header{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.button{
+    font-family: 'Calibri Light';
+    border: solid 2px #576c32;
+    background: blanchedalmond;
+    color: #822c2c;
+}
+
+.label{
+    font-family: "Calibri Light";
+}
+
+.ast{
+    color: red;
+}
+
+.notation{
+    font-size: 12px;
+    font-family: "Calibri Light";
+}
+
+#createAccount_button{
+    width: 115px;
+    height: 30px;
+    font-weight: bold;
+    font-size: 15px;
+}
+
+#signup_header{
+    font-family: Arial;
+    color: #8fa863;
+}
+
+#back_button{
+    border: solid 1px #8fa863;
+}

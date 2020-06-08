@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title id="title"></title>
+</head>
+<body>
+<p id="text_control"></p>
+<form action="/" method="get" id="form_control"></form>
+<script>
+    let urlParams = new URLSearchParams(window.location.search);
+    let value = urlParams.get("message");
+    let text = document.getElementById("text_control");
+    let form = document.getElementById("form_control");
+
+    switch (value) {
+        case "user_exists": {
+            text.innerText = "User exists! Please select another username. ";
+            form.innerHTML = "<input type='submit' value='Return'>";
+            form.action = "/signup";
+            break;
+        }
+        case "invalid_input" : {
+            text.innerText = "Your username or password does not meet the requirements! ";
+            form.innerHTML = "<input type='submit' value='Return'>";
+            form.action = "/signup";
+            break;
+        }
+        case "database_error" : {
+            text.innerText = "Unexpected error. ";
+            form.innerHTML = "<input type='submit' value='Return'>";
+            form.action = "/signup";
+            break;
+        }
+        case "success" : {
+            text.innerText = "Success!";
+            form.innerHTML = "<input type='submit' value='Return to game'>";
+            break;
+        }
+        default:
+    }
+</script>
+</body>
+</html>

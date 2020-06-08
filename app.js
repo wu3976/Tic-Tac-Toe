@@ -13,6 +13,9 @@ const db = "tic_tac_toc_user_data";
 const table = "user_stats";
 
 const port = 3000;
+
+const userName_reqi = [0, 0, 0];
+const passWord_reqi = [1, 1, 1];
 /*-----------------------------------End-----------------------------------------------*/
 
 MAX_ACCESS_CODE = 100000000;
@@ -39,11 +42,11 @@ sql.connect((err) => {
 
 const server = expressMod();
 
+/* Configurating middlewares */
+
 server.use(bpMod.urlencoded({
     extended : false
 }));
-
-/* Configurating middlewares */
 
 server.use(expressMod.static(pathMod.join(__dirname, "static")));
 
@@ -115,14 +118,46 @@ server.get("/logout", (req, res) => {
     delete online_user[req.cookies['access_code']];
     res.send(`<p style="font-family: 'Calibri Light';">You have logged out!"</p>`
             + `<form action="/" method="get"><input type="submit" value="Return to game"></form>`);
-})
+});
 
-server.get("/cookieTest", (req, res) => {
-    let cookie = res.cookie("id", "degjnd"); // set up the cookie
-    cookie.send('cookie set'); // send the cookie
-})
+server.get("/signup", (req, res) => {
+    res.sendFile(pathMod.join(__dirname, "static", "signup.html"));
+});
 
+server.post("/signup", (req, res) => {
+    if (utilMod.checkValidAcctOrPwd(req.body['userName'], 3, userName_reqi)
+            && utilMod.checkValidAcctOrPwd(req.body['passWord'], 3, passWord_reqi)
+            && utilMod.checkValidContactInfo(req.body['contactInfo'])){
+        let query = `SELECT * from ${table} WHERE user_id = "${req.body['userName']}";`
+        console.log(query);
+        sql.query(query, (err, result) => {
+            console.log(result);
+            if (err){
+                res.redirect("/signup_result?message=database_error");
+            } else if (result.length > 0){
+                res.redirect("/signup_result?message=user_exists");
+            } else {
+                let contact = req.body['contactInfo'].length === 0 ? null : `"${req.body['contactInfo']}"`
+                let query2 = `INSERT INTO ${table} VALUES ("${req.body['userName']}", `
+                    + `"${req.body['passWord']}", ${contact}, 0, 0, 0);`;
+                console.log(query2);
+                sql.query(query2, (err, result) => {
+                    if (err){
+                        res.redirect("/signup_result?message=database_error");
+                    } else {
+                        res.redirect("/signup_result?message=success");
+                    }
+                });
+            }
+        });
+    } else {
+        res.redirect("/signup_result?message=invalid_input")
+    }
+});
 
+server.get("/signup_result", (req, res) => {
+    res.sendFile(pathMod.join(__dirname, "static", "signup_result.html"));
+});
 
 server.listen(port);
 

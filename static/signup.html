@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign up</title>
+    <link rel="stylesheet" type="text/css" href="signup_style.css">
+</head>
+<body>
+<p class="header" id="signup_header">Sign up</p>
+<form action="/signup" method="post">
+    <p>
+        <label for="userName" class="label" id="userName_label">Username: &emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;</label>
+        <input type="text" id="userName" name="userName">
+        <span class="ast">*</span>
+    </p>
+    <p>
+        <label for="passWord" class="label" id="passWord_label">Password: &emsp;&emsp;&emsp;&emsp;</label>
+        <input type="text" id="passWord" name="passWord">
+        <span class="ast">*</span>
+        <span class="notation">&emsp;--must contain upper case letter, lower case letter and digit</span>
+    </p>
+    <p>
+        <label for="contactInfo" class="label" id="contactInfo_label">Contact information: </label>
+        <input type="text" id="contactInfo" name="contactInfo">
+    </p>
+    <p>
+        <input type="submit" class="button" id="createAccount_button" value="Create account">
+    </p>
+</form>
+<form method="get" action="/">
+    <input type="submit" class="button" id="back_button" value="Back">
+</form>
+<p style="font-family: 'Calibri Light'; font-weight: bold;"><span class="ast">*</span>required</p>
+</body>
+</html>
